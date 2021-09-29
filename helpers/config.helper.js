@@ -1,17 +1,17 @@
 import supertest from "supertest";
 
-class AuthHelper {
-    constructor() {
+class ConfigHelper{
+    constructor(){
         this.response = null;
     }
 
-    async post (login,password) {
+    async wipeData(){
         await supertest(process.env.BASE_URL)
-            .post('/auth')
-            .send({login: login, password: password})
+            .delete('/config')
+            .set('Authorization', process.env.TOKEN)
             .then((res)=> {this.response = res});
         return this.response;
     }
 }
 
-export default AuthHelper;
+export default ConfigHelper;
